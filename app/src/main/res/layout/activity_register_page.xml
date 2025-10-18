@@ -14,6 +14,7 @@
         android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:text="Register"
+        android:textColor="@color/black"
         android:textSize="30.sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +27,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="12dp"
         android:text="Enter your username"
+        android:textColor="@color/black"
         android:textSize="16.sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
@@ -35,10 +37,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userrnameregInput"
         android:layout_width="364dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:hint="Enter your username"
+        android:textColorHint="@color/black"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -48,7 +51,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/usernameInputTXT"
-            textColor="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPersonName" />
@@ -60,6 +64,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="4dp"
         android:text="Enter your email"
+        android:textColor="@color/black"
         android:textSize="16.sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
@@ -69,10 +74,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailregInput"
         android:layout_width="364dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="4dp"
         android:hint="Enter your email"
+        android:textColorHint="@color/black"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -82,7 +88,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailregTXT"
-            textColor="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -96,6 +103,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:text="Enter your password"
+        android:textColor="@color/black"
         android:textSize="16.sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
@@ -105,7 +113,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordRegInput"
         android:layout_width="364dp"
-        android:layout_height="57dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="4dp"
         android:hint="Enter your password"
@@ -119,7 +127,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/PasswordregTXT"
-            atextColor="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -132,6 +141,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:text="Enter your password"
+        android:textColor="@color/black"
         android:textSize="16.sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
@@ -141,7 +151,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/repasswordRegInput"
         android:layout_width="364dp"
-        android:layout_height="57dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="4dp"
         android:hint="Enter your password"
@@ -155,7 +165,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/rePasswordregTXT"
-            atextColor="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -169,6 +180,7 @@
         android:layout_marginTop="36dp"
         android:backgroundTint="@color/black"
         android:text="Login"
+        android:textColor="@color/white"
         app:cornerRadius="5.dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,6 +192,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Don't have an account?"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.379"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,6 +204,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Sign In"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.694"
@@ -203,6 +217,7 @@
         android:layout_height="28dp"
         android:layout_marginTop="12dp"
         android:text="or"
+        android:textColor="@color/black"
         android:textSize="20.sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

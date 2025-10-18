@@ -15,6 +15,7 @@
         android:layout_marginTop="44dp"
         android:fontFamily="sans-serif-black"
         android:text="Login"
+        android:textColor="@color/black"
         android:textSize="30.sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +29,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="196dp"
         android:text="Enter your mobile number"
+        android:textColor="@color/black"
         android:textSize="16.sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,10 +37,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInput"
         android:layout_width="364dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="12dp"
         android:hint="Enter your email"
+        android:textColorHint="@color/black"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -48,10 +51,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailinputTXT"
-            textColor="@color/black"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text" />
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -62,6 +66,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="Enter your password"
+        android:textColor="@color/black"
         android:textSize="16.sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailInput" />
@@ -69,7 +74,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInput"
         android:layout_width="364dp"
-        android:layout_height="57dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="12dp"
         android:hint="Enter your password"
@@ -86,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
-            atextColor="@color/black" />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -95,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Forgotten password"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +113,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/black"
         android:text="Login"
+        android:textColor="@color/white"
         app:cornerRadius="5.dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
@@ -119,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Don't have an account?"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.379"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Sign Up"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.694"
@@ -142,6 +151,7 @@
         android:layout_height="28dp"
         android:layout_marginTop="12dp"
         android:text="or"
+        android:textColor="@color/black"
         android:textSize="20.sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
