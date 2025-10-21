@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -31,11 +34,8 @@ class MainActivity : AppCompatActivity() {
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
 
-
-
         // Load saved data into the EditText fields when the app starts
         loadSavedData(prefs)
-
 
 
         // Set up the end icon click listener for email input field
@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
         // Save the data when the user types in the EditText fields
         binding.emailinputTXT.addTextChangedListener {
             saveData(prefs)
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.loginBTN.setOnClickListener{
+        binding.loginBTN.setOnClickListener {
             val email = binding.emailinputTXT.text.toString()
             val password = binding.inputPasswordTXT.text.toString()
 
@@ -69,10 +68,15 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show()
                 } else {
                     if (password.isEmpty()) {
-                        Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT)
+                            .show()
                     } else {
                         if (password.length < 8) {
-                            Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "Password must be at least 8 characters",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, HomePage::class.java)
@@ -101,7 +105,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     // Function to save data into SharedPreferences
     private fun saveData(prefs: SharedPreferences) {
         val email = binding.emailinputTXT.text.toString().trim()
@@ -115,11 +118,24 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun loadSavedData(prefs: SharedPreferences) {
         val savedName = prefs.getString(KEY_EMAIL, "")
 
         // Set the saved data in the EditText fields
         binding.emailinputTXT.setText(savedName)
 
-}
+    }
+    // This function runs every time you touch anywhere on the screen
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (currentFocus != null) {  // Check if something (like an EditText) is currently focused
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            // Hide the keyboard
+            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+            // Remove focus from the EditText so the cursor disappears
+            currentFocus!!.clearFocus()
+        }
+        // Pass the touch event to the rest of the system
+        return super.dispatchTouchEvent(ev)
+    }
 }
