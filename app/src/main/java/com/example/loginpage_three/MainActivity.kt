@@ -30,23 +30,32 @@ class MainActivity : AppCompatActivity() {
         // Get SharedPreferences to store and retrieve data
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
+
+
+
         // Load saved data into the EditText fields when the app starts
         loadSavedData(prefs)
+
+
+
         // Set up the end icon click listener for email input field
         binding.emailInput.setEndIconOnClickListener {
             // Clear the email EditText
             binding.emailinputTXT.setText("")
-
             // Clear the email from SharedPreferences
             val editor = prefs.edit()
             editor.remove(KEY_EMAIL)
             editor.apply()  // Apply changes asynchronously
         }
 
+
+
         // Save the data when the user types in the EditText fields
         binding.emailinputTXT.addTextChangedListener {
             saveData(prefs)
         }
+
+
 
         binding.loginBTN.setOnClickListener{
             val email = binding.emailinputTXT.text.toString()
@@ -74,17 +83,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
         binding.signupTV.setOnClickListener {
             val intent = Intent(this, RegisterPage::class.java)
             startActivity(intent)
 
         }
 
+
+
         binding.forgotpassTV.setOnClickListener {
             val intent = Intent(this, ForgotPasswordPageOne::class.java)
             startActivity(intent)
         }
+
     }
+
+
+
     // Function to save data into SharedPreferences
     private fun saveData(prefs: SharedPreferences) {
         val email = binding.emailinputTXT.text.toString().trim()
