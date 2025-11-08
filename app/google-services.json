@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "949889846163",
+    "project_id": "loginpage-three-abd03",
+    "storage_bucket": "loginpage-three-abd03.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949889846163:android:ee41edfa5d1170bda1b666",
+        "android_client_info": {
+          "package_name": "com.example.loginpage_three"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGyOAmqGJb2AXj9ufaV3iSLhi0yXlTMBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

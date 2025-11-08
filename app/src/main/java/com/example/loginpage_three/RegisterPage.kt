@@ -4,12 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.loginpage_three.databinding.ActivityRegisterPageBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterPage : AppCompatActivity() {
+
+    private val auth = FirebaseAuth.getInstance()
     private val PREFS_NAME = "my_prefs"
     private val KEY_USERNAME = "key_username"
     private val KEY_EMAIL = "key_email"
@@ -37,7 +42,7 @@ class RegisterPage : AppCompatActivity() {
             saveData(prefs)
         }
 
-        // Set up button click
+        // Handle registration
         binding.loginBTN.setOnClickListener {
             val username = binding.usernameInputTXT.text.toString().trim()
             val email = binding.emailregTXT.text.toString().trim()
@@ -46,59 +51,78 @@ class RegisterPage : AppCompatActivity() {
 
             when {
                 username.isEmpty() -> {
-                    Toast.makeText(this, "Please enter your username", Toast.LENGTH_SHORT).show()
-                }
-                username.length < 4 -> {
-                    Toast.makeText(this, "Username must be at least 4 characters", Toast.LENGTH_SHORT).show()
-                }
-                username.length > 15 -> {
-                    Toast.makeText(this, "Username cannot be longer than 15 characters", Toast.LENGTH_SHORT).show()
+                    showToast("Please enter your username")
                 }
 
-                username.matches(Regex("^[A-Za-z0-9._]+$")) -> {
-                    Toast.makeText(this, "Only letters, numbers, underscores, and dots are allowed", Toast.LENGTH_SHORT).show()
+                username.length < 4 -> {
+                    showToast("Username must be at least 4 characters")
                 }
+
+                username.length > 15 -> {
+                    showToast("Username cannot be longer than 15 characters")
+                }
+
+                !username.matches(Regex("^[A-Za-z0-9]+$")) -> {
+                    showToast("Username Only letters, numbers,are allowed")
+                }
+
                 username.contains("..") || username.contains("__") -> {
-                    Toast.makeText(this, "No consecutive dots or underscores allowed", Toast.LENGTH_SHORT).show()
+                    showToast("No consecutive dots or underscores allowed")
                 }
 
                 email.isEmpty() -> {
-                    Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
-                }
-                !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show()
-                }
-                password.isEmpty() -> {
-                    Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
-                }
-                password.length < 8 -> {
-                    Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
-                }
-                !password.matches(Regex(".*[A-Z].*")) -> {
-                    Toast.makeText(this, "Password must contain at least one uppercase letter", Toast.LENGTH_SHORT).show()
-                }
-                !password.matches(Regex(".*[a-z].*")) -> {
-                    Toast.makeText(this, "Password must contain at least one lowercase letter", Toast.LENGTH_SHORT).show()
-                }
-                !password.matches(Regex(".*\\d.*")) -> {
-                    Toast.makeText(this, "Password must contain at least one number", Toast.LENGTH_SHORT).show()
-                }
-                !password.matches(Regex(".*[!@#\$%^&*(),.?\":{}|<>].*")) -> {
-                    Toast.makeText(this, "Password must contain at least one special character", Toast.LENGTH_SHORT).show()
+                    showToast("Please enter your email")
                 }
 
+                !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    showToast("Please enter a valid email")
+                }
+
+                password.isEmpty() -> {
+                    showToast("Please enter your password")
+                }
+
+                password.length < 8 -> {
+                    showToast("Password must be at least 8 characters")
+                }
+
+                !password.matches(Regex(".*[A-Z].*")) -> {
+                    showToast("Password must contain at least one uppercase letter")
+                }
+
+                !password.matches(Regex(".*[a-z].*")) -> {
+                    showToast("Password must contain at least one lowercase letter")
+                }
+
+                !password.matches(Regex(".*\\d.*")) -> {
+                    showToast("Password must contain at least one number")
+                }
+
+                !password.matches(Regex(".*[!@#\$%^&*(),.?\":{}|<>].*")) -> {
+                    showToast("Password must contain at least one special character")
+                }
 
                 repassword.isEmpty() -> {
-                    Toast.makeText(this, "Please confirm your password", Toast.LENGTH_SHORT).show()
+                    showToast("Please confirm your password")
                 }
+
                 password != repassword -> {
-                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                    showToast("Passwords do not match")
                 }
+
                 else -> {
-                    // ✅ All checks passed
-                    Toast.makeText(this, "Signup Successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    // ✅ Create user in Firebase
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                showToast("Signup Successful")
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                showToast("Signup Failed: ${task.exception?.message}")
+                            }
+                        }
                 }
             }
         }
@@ -110,7 +134,7 @@ class RegisterPage : AppCompatActivity() {
         }
     }
 
-    // ✅ Function to save data
+    // ✅ Helper: Save username & email
     private fun saveData(prefs: SharedPreferences) {
         val username = binding.usernameInputTXT.text.toString().trim()
         val email = binding.emailregTXT.text.toString().trim()
@@ -121,7 +145,7 @@ class RegisterPage : AppCompatActivity() {
         editor.apply() // apply() saves asynchronously
     }
 
-    // ✅ Function to load saved data
+    // ✅ Helper: Load username & email
     private fun loadSavedData(prefs: SharedPreferences) {
         val savedName = prefs.getString(KEY_USERNAME, "")
         val savedEmail = prefs.getString(KEY_EMAIL, "")
@@ -129,4 +153,21 @@ class RegisterPage : AppCompatActivity() {
         binding.usernameInputTXT.setText(savedName)
         binding.emailregTXT.setText(savedEmail)
     }
+
+    // ✅ Helper: Reusable Toast
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+
+    // ✅ Hide keyboard when touching outside EditText
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        currentFocus?.let {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+            it.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
 }
